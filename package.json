@@ -4,7 +4,7 @@
   "description": "Template repo for authoring libraries that export React components",
   "main": "dist/index.js",
   "config": {
-    "src": "./{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc}"
+    "src": "./{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}"
   },
   "scripts": {
     "lint": "eslint ./src",
