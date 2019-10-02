@@ -44,3 +44,9 @@ node_modules/
 .cache
 
 .DS_Store
+
+# allow the overriding of husky config by never checking in .huskyrc
+.huskyrc
+
+# get outta here
+.vscode

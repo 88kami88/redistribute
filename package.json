@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "description": "Template repo for authoring libraries that export React components",
   "main": "dist/index.js",
+  "config": {
+    "src": "./{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json}"
+  },
   "scripts": {
+    "prettier:check": "prettier $npm_package_config_src --check",
+    "prettier": "prettier $npm_package_config_src --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +29,10 @@
   "bugs": {
     "url": "https://github.com/ethersage/redistribute/issues"
   },
-  "homepage": "https://github.com/ethersage/redistribute#readme"
+  "homepage": "https://github.com/ethersage/redistribute#readme",
+  "devDependencies": {
+    "husky": "^3.0.8",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1"
+  }
 }
