@@ -1,0 +1,28 @@
+{
+  "name": "redistribute",
+  "version": "0.0.0",
+  "description": "Template repo for authoring libraries that export React components",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ethersage/redistribute.git"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "template",
+    "library",
+    "distribute",
+    "redistribute",
+    "distribution"
+  ],
+  "author": "kami <jmkaminetsky@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ethersage/redistribute/issues"
+  },
+  "homepage": "https://github.com/ethersage/redistribute#readme"
+}
