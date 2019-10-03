@@ -7,6 +7,8 @@
     "src": "./{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}"
   },
   "scripts": {
+    "build": "webpack --config webpack/webpack.config.js --mode production",
+    "dev": "webpack --config webpack/webpack.config.js --watch",
     "lint": "eslint ./src",
     "prettier:check": "prettier $npm_package_config_src --check",
     "prettier": "prettier $npm_package_config_src --write",
