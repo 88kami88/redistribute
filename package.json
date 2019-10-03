@@ -41,7 +41,6 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
     "babel-loader": "^8.0.6",
-    "babel-plugin-styled-components": "^1.10.6",
     "babel-preset-typescript": "^7.0.0-alpha.19",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^6.5.1",
@@ -63,9 +62,7 @@
   "dependencies": {
     "@types/react": "^16.9.4",
     "@types/react-dom": "^16.9.1",
-    "@types/styled-components": "^4.1.19",
-    "react": "^16.10.1",
-    "styled-components": "^4.4.0"
+    "react": "^16.10.1"
   },
   "volta": {
     "node": "10.16.3",
