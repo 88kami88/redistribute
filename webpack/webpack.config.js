@@ -13,7 +13,7 @@ const base = {
 
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '../', 'dist/'),
+    path: path.resolve(__dirname, '../', 'dist/webpack/'),
   },
 
   plugins: [new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['*.js'] })],

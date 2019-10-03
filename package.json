@@ -9,12 +9,13 @@
     "src": "./{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}"
   },
   "scripts": {
-    "build": "webpack --config webpack/webpack.config.js --mode production",
-    "dev": "webpack --config webpack/webpack.config.js --watch",
+    "babel": "babel src/ --out-dir dist/es6 -s --extensions \".js,.jsx,.ts,.tsx\"",
+    "build": "yarn babel && yarn webpack",
     "lint": "eslint ./src",
     "prettier:check": "prettier $npm_package_config_src --check",
     "prettier": "prettier $npm_package_config_src --write",
-    "test": "yarn lint && yarn prettier:check"
+    "test": "yarn lint && yarn prettier:check",
+    "webpack": "webpack --config webpack/webpack.config.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -36,12 +37,13 @@
   },
   "homepage": "https://github.com/ethersage/redistribute#readme",
   "devDependencies": {
+    "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
+    "@babel/plugin-transform-typescript": "^7.6.0",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
     "babel-loader": "^8.0.6",
-    "babel-preset-typescript": "^7.0.0-alpha.19",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
