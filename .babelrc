@@ -1,4 +1,21 @@
 {
-  "presets": ["@babel/preset-react", "@babel/typescript", ["@babel/env", { "modules": false }]],
-  "plugins": ["@babel/plugin-transform-typescript"]
+  "presets": ["@babel/preset-react", "@babel/typescript", ["@babel/env"]],
+  "plugins": ["@babel/plugin-transform-typescript"],
+  "env": {
+    "amd": {
+      "presets": ["@babel/preset-react", "@babel/typescript", ["@babel/env", { "modules": "amd" }]]
+    },
+    "commonjs": {
+      "presets": ["@babel/preset-react", "@babel/typescript", ["@babel/env", { "modules": "commonjs" }]]
+    },
+    "es6": {
+      "presets": ["@babel/preset-react", "@babel/typescript", ["@babel/env", { "modules": false }]]
+    },
+    "systemjs": {
+      "presets": ["@babel/preset-react", "@babel/typescript", ["@babel/env", { "modules": "systemjs" }]]
+    },
+    "umd": {
+      "presets": ["@babel/preset-react", "@babel/typescript", ["@babel/env", { "modules": "umd" }]]
+    }
+  }
 }

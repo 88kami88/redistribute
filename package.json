@@ -9,12 +9,17 @@
     "src": "./{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}"
   },
   "scripts": {
-    "babel": "babel src/ --out-dir dist/es6 -s --extensions \".js,.jsx,.ts,.tsx\"",
-    "build": "yarn babel && yarn webpack",
+    "amd": "BABEL_ENV=amd yarn babel dist/amd",
+    "babel": "babel src/ -s --extensions \".js,.jsx,.ts,.tsx\" --out-dir",
+    "build": "yarn amd && yarn commonjs && yarn es6 && yarn systemjs && yarn umd && yarn webpack",
+    "commonjs": "BABEL_ENV=commonjs yarn babel dist/commonjs",
+    "es6": "BABEL_ENV=es6 yarn babel dist/es6",
     "lint": "eslint ./src",
     "prettier:check": "prettier $npm_package_config_src --check",
     "prettier": "prettier $npm_package_config_src --write",
+    "systemjs": "BABEL_ENV=systemjs yarn babel dist/systemjs",
     "test": "yarn lint && yarn prettier:check",
+    "umd": "BABEL_ENV=umd yarn babel dist/umd",
     "webpack": "webpack --config webpack/webpack.config.js --mode production"
   },
   "repository": {
