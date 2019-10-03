@@ -1,5 +1,5 @@
 {
-  "name": "redistribute",
+  "name": "@ethersage/redistribute",
   "version": "0.0.0",
   "description": "Template repo for authoring libraries that export React components",
   "main": "dist/index.js",
@@ -69,7 +69,8 @@
   "dependencies": {
     "@types/react": "^16.9.4",
     "@types/react-dom": "^16.9.1",
-    "react": "^16.10.1"
+    "react": "^16.10.1",
+    "webpack-external-import": "^0.1.0-beta.1"
   },
   "volta": {
     "node": "10.16.3",

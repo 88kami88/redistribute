@@ -5,3 +5,5 @@ interface Props {
 }
 
 export const Button: FunctionComponent<Props> = ({ onClick }) => <button onClick={onClick} />;
+
+/* externalize:Button */
