@@ -38,6 +38,10 @@ const base = {
       root: 'React',
     },
   },
+
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
 };
 
 module.exports = merge(base, env);
