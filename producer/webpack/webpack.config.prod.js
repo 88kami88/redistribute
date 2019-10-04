@@ -1,7 +1,7 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const URLImportPlugin = require('webpack-external-import/webpack');
 
-const pkg = require('../package.json');
+const pkg = require('../../package.json');
 
 module.exports = {
   mode: 'production',

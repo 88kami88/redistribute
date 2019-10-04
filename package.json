@@ -6,24 +6,34 @@
   "module": "dist/index.js",
   "sideEffects": false,
   "config": {
-    "src": "./{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}",
-    "producer": "producer"
+    "consumer": "consumer",
+    "dist": {
+      "amd": "dist/amd",
+      "commonjs": "dist/commonjs",
+      "es6": "dist/es6",
+      "systemjs": "dist/systemjs",
+      "umd": "dist/umd",
+      "webpack": "dist/webpack"
+    },
+    "extensions": ".js,.jsx,.ts,.tsx",
+    "producer": "producer",
+    "src": "{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}"
   },
   "scripts": {
-    "amd": "BABEL_ENV=amd yarn babel dist/amd",
-    "babel": "babel src/ -s --extensions \".js,.jsx,.ts,.tsx\" --out-dir",
+    "amd": "BABEL_ENV=amd yarn babel $npm_package_config_producer/$npm_package_config_dist_amd",
+    "babel": "babel $npm_package_config_producer/$npm_package_config_src -s --extensions \"$npm_package_config_extensions\" --out-dir",
     "build": "yarn amd && yarn commonjs && yarn es6 && yarn systemjs && yarn umd && yarn webpack",
-    "postbuild": "mkdir -p ${npm_package_config_producer} && rm -rf ${npm_package_config_producer}/* && cp dist/webpack/* ${npm_package_config_producer}",
-    "commonjs": "BABEL_ENV=commonjs yarn babel dist/commonjs",
-    "es6": "BABEL_ENV=es6 yarn babel dist/es6",
-    "lint": "eslint ./src",
-    "prettier:check": "prettier $npm_package_config_src --check",
-    "prettier": "prettier $npm_package_config_src --write",
-    "start": "(cd producer/ && ws --hostname localhost -p 3000)",
-    "systemjs": "BABEL_ENV=systemjs yarn babel dist/systemjs",
+    "commonjs": "BABEL_ENV=commonjs yarn babel $npm_package_config_producer/$npm_package_config_dist_commonjs",
+    "consumer": "(cd $npm_package_config_consumer && ws --hostname localhost -p 3002 --http2)",
+    "es6": "BABEL_ENV=es6 yarn babel $npm_package_config_producer/$npm_package_config_dist_es6",
+    "lint": "eslint $npm_package_config_producer/$npm_package_config_src",
+    "prettier:check": "prettier $npm_package_config_producer/$npm_package_config_src --check",
+    "prettier": "prettier $npm_package_config_producer/$npm_package_config_src --write",
+    "producer": "(cd $npm_package_config_producer/$npm_package_config_dist_webpack && ws --hostname localhost -p 3001 --http2)",
+    "systemjs": "BABEL_ENV=systemjs yarn babel $npm_package_config_producer/$npm_package_config_dist_systemjs",
     "test": "yarn lint && yarn prettier:check",
-    "umd": "BABEL_ENV=umd yarn babel dist/umd",
-    "webpack": "webpack --config webpack/webpack.config.js --mode production"
+    "umd": "BABEL_ENV=umd yarn babel $npm_package_config_producer/$npm_package_config_dist_umd",
+    "webpack": "webpack --config $npm_package_config_producer/webpack/webpack.config.js --mode production"
   },
   "repository": {
     "type": "git",
