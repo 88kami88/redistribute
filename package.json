@@ -18,7 +18,7 @@
     },
     "extensions": ".js,.jsx,.ts,.tsx",
     "producer": "producer",
-    "src": "{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}",
+    "src": "{src/**/*.{js,jsx,ts,tsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}",
     "webpack": "webpack/webpack.config.js"
   },
   "scripts": {
@@ -64,6 +64,8 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
+    "@typescript-eslint/eslint-plugin": "^2.3.2",
+    "@typescript-eslint/parser": "^2.3.2",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^6.5.1",
@@ -80,6 +82,7 @@
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
     "terser-webpack-plugin": "^2.1.2",
+    "typescript": "^3.6.3",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9",
     "webpack-merge": "^4.2.2"
@@ -87,6 +90,7 @@
   "dependencies": {
     "@types/react": "^16.9.4",
     "@types/react-dom": "^16.9.1",
+    "prop-types": "^15.7.2",
     "react": "^16.10.1",
     "webpack-external-import": "^0.1.0-beta.1"
   },
