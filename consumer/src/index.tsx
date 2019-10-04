@@ -11,32 +11,34 @@ class App extends Component {
   constructor(props: Props) {
     super(props);
     this.state = {
-      loaded: false,
-      manifestLoaded: false,
+      isLoaded: false,
     };
   }
 
   componentDidMount() {
-    corsImport('http://localhost:3001/importManifest.js').then(() => {
-      this.setState({ manifestLoaded: true });
-      import(/* webpackIgnore:true */ 'http://localhost:3001/getText.js').then(() => {
-        const getText = __webpack_require__('getText');
-        console.log(getText.default());
-        setTimeout(() => {
-          this.setState({ loaded: true });
-        }, 2000);
-      });
-    });
+    corsImport('http://localhost:3001/importManifest.js').then(() =>
+      Promise.all([
+        importDependenciesOf('http://localhost:3001/', 'producer', 'Button.js').then(url =>
+          import(/* webpackIgnore:true */ url)
+        ),
+        importDependenciesOf('http://localhost:3001/', 'producer', 'getText.js').then(url =>
+          import(/* webpackIgnore:true */ url)
+        ),
+      ]).then(() => this.setState({ isLoaded: true }))
+    );
   }
 
   render() {
-    const { manifestLoaded, loaded } = this.state;
+    const { isLoaded } = this.state;
 
-    if (!manifestLoaded || !loaded) {
+    if (!isLoaded) {
       return 'loading...';
     }
 
-    return null;
+    const getText = __webpack_require__('getText').default;
+    const Button = __webpack_require__('Button').default;
+
+    return <Button onClick={() => alert('clicked')}>{getText()}</Button>;
   }
 }
 

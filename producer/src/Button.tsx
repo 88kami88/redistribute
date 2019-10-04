@@ -6,7 +6,7 @@ interface Props {
   onClick(): void;
 }
 
-export const Button: FunctionComponent<Props> = ({ onClick, children }: InferProps<typeof Button.propTypes>) => (
+const Button: FunctionComponent<Props> = ({ onClick, children }: InferProps<typeof Button.propTypes>) => (
   <button type="button" onClick={onClick}>
     {children}
   </button>

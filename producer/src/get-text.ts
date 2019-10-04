@@ -1,4 +1,4 @@
-export const getText = (): string => 'click me';
+const getText = (): string => 'click me';
 
 export default getText;
 
