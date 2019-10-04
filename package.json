@@ -11,7 +11,6 @@
       "amd": "dist/amd",
       "commonjs": "dist/commonjs",
       "es6": "dist/es6",
-      "root": "dist",
       "systemjs": "dist/systemjs",
       "umd": "dist/umd",
       "webpack": "dist/webpack"
@@ -25,18 +24,18 @@
     "amd": "BABEL_ENV=amd yarn babel $npm_package_config_producer/$npm_package_config_dist_amd",
     "babel": "babel $npm_package_config_producer/$npm_package_config_src -s --extensions \"$npm_package_config_extensions\" --out-dir",
     "build": "yarn amd && yarn commonjs && yarn es6 && yarn systemjs && yarn umd && yarn webpack",
-    "build:consumer": "webpack --config $npm_package_config_consumer/$npm_package_config_webpack --mode production",
+    "build:consumer": "webpack --config $npm_package_config_consumer/$npm_package_config_webpack --mode development",
     "commonjs": "BABEL_ENV=commonjs yarn babel $npm_package_config_producer/$npm_package_config_dist_commonjs",
     "es6": "BABEL_ENV=es6 yarn babel $npm_package_config_producer/$npm_package_config_dist_es6",
     "lint": "eslint $npm_package_config_producer/$npm_package_config_src",
     "prettier:check": "prettier $npm_package_config_producer/$npm_package_config_src --check",
     "prettier": "prettier $npm_package_config_producer/$npm_package_config_src --write",
     "start:consumer": "(cd $npm_package_config_consumer/public && ws --hostname localhost -p 3002)",
-    "start:producer": "(cd $npm_package_config_producer/$npm_package_config_dist_root && ws --hostname localhost -p 3001)",
+    "start:producer": "(cd $npm_package_config_producer/$npm_package_config_dist_webpack && ws --hostname localhost -p 3001)",
     "systemjs": "BABEL_ENV=systemjs yarn babel $npm_package_config_producer/$npm_package_config_dist_systemjs",
     "test": "yarn lint && yarn prettier:check",
     "umd": "BABEL_ENV=umd yarn babel $npm_package_config_producer/$npm_package_config_dist_umd",
-    "webpack": "webpack --config $npm_package_config_producer/$npm_package_config_webpack --mode production"
+    "webpack": "webpack --config $npm_package_config_producer/$npm_package_config_webpack --mode development"
   },
   "repository": {
     "type": "git",
@@ -92,6 +91,7 @@
     "@types/react-dom": "^16.9.1",
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
+    "react-dom": "^16.10.2",
     "webpack-external-import": "^0.1.0-beta.1"
   },
   "volta": {

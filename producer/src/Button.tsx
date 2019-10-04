@@ -2,12 +2,13 @@ import React, { FunctionComponent } from 'react';
 import PropTypes, { InferProps } from 'prop-types';
 
 interface Props {
+  children: JSX.Element;
   onClick(): void;
 }
 
-export const Button: FunctionComponent<Props> = ({ onClick }: InferProps<typeof Button.propTypes>) => (
+export const Button: FunctionComponent<Props> = ({ onClick, children }: InferProps<typeof Button.propTypes>) => (
   <button type="button" onClick={onClick}>
-    click me
+    {children}
   </button>
 );
 

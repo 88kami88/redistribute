@@ -1,2 +1,2 @@
-export { Button } from './Button';
-export { TextField } from './TextField';
+export { default as Button } from './Button';
+export { default as getText } from './get-text';
