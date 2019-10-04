@@ -1,5 +1,6 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, '../', 'src/index'),
@@ -9,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, '../', 'public'),
   },
 
-  plugins: [new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['*.{js,map,html}'] })],
+  plugins: [new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['*.{js,map,html}'] }), new HtmlWebpackPlugin()],
 
   module: {
     rules: [
@@ -21,15 +22,6 @@ module.exports = {
         },
       },
     ],
-  },
-
-  externals: {
-    react: {
-      commonjs: 'react',
-      commonjs2: 'react',
-      amd: 'react',
-      root: 'React',
-    },
   },
 
   resolve: {

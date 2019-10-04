@@ -18,23 +18,25 @@
     },
     "extensions": ".js,.jsx,.ts,.tsx",
     "producer": "producer",
-    "src": "{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}"
+    "src": "{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}",
+    "webpack": "webpack/webpack.config.js"
   },
   "scripts": {
     "amd": "BABEL_ENV=amd yarn babel $npm_package_config_producer/$npm_package_config_dist_amd",
     "babel": "babel $npm_package_config_producer/$npm_package_config_src -s --extensions \"$npm_package_config_extensions\" --out-dir",
     "build": "yarn amd && yarn commonjs && yarn es6 && yarn systemjs && yarn umd && yarn webpack",
+    "build:consumer": "webpack --config $npm_package_config_consumer/$npm_package_config_webpack",
     "commonjs": "BABEL_ENV=commonjs yarn babel $npm_package_config_producer/$npm_package_config_dist_commonjs",
-    "consumer": "(cd $npm_package_config_consumer/public && ws --hostname localhost -p 3002)",
     "es6": "BABEL_ENV=es6 yarn babel $npm_package_config_producer/$npm_package_config_dist_es6",
     "lint": "eslint $npm_package_config_producer/$npm_package_config_src",
     "prettier:check": "prettier $npm_package_config_producer/$npm_package_config_src --check",
     "prettier": "prettier $npm_package_config_producer/$npm_package_config_src --write",
-    "producer": "(cd $npm_package_config_producer/$npm_package_config_dist_root && ws --hostname localhost -p 3001)",
+    "start:consumer": "(cd $npm_package_config_consumer/public && ws --hostname localhost -p 3002)",
+    "start:producer": "(cd $npm_package_config_producer/$npm_package_config_dist_root && ws --hostname localhost -p 3001)",
     "systemjs": "BABEL_ENV=systemjs yarn babel $npm_package_config_producer/$npm_package_config_dist_systemjs",
     "test": "yarn lint && yarn prettier:check",
     "umd": "BABEL_ENV=umd yarn babel $npm_package_config_producer/$npm_package_config_dist_umd",
-    "webpack": "webpack --config $npm_package_config_producer/webpack/webpack.config.js --mode production"
+    "webpack": "webpack --config $npm_package_config_producer/$npm_package_config_webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -72,6 +74,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.15.1",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
     "husky": "^3.0.8",
     "local-web-server": "^3.0.7",
     "prettier": "^1.18.2",
