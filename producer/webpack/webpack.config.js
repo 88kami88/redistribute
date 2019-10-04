@@ -35,23 +35,12 @@ module.exports = {
     ],
   },
 
-  // externals: {
-  //   react: {
-  //     commonjs: 'react',
-  //     commonjs2: 'react',
-  //     amd: 'react',
-  //     root: 'React',
-  //   },
-  // },
-
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 
   optimization: {
-    runtimeChunk: {
-      name: 'manifest',
-    },
+    runtimeChunk: true,
     splitChunks: {
       chunks: 'all',
       maxInitialRequests: Infinity,
@@ -59,5 +48,3 @@ module.exports = {
     },
   },
 };
-
-// module.exports = merge(base, env);
