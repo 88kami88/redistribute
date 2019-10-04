@@ -6,17 +6,20 @@
   "module": "dist/index.js",
   "sideEffects": false,
   "config": {
-    "src": "./{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}"
+    "src": "./{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}",
+    "producer": "producer"
   },
   "scripts": {
     "amd": "BABEL_ENV=amd yarn babel dist/amd",
     "babel": "babel src/ -s --extensions \".js,.jsx,.ts,.tsx\" --out-dir",
     "build": "yarn amd && yarn commonjs && yarn es6 && yarn systemjs && yarn umd && yarn webpack",
+    "postbuild": "mkdir -p ${npm_package_config_producer} && rm -rf ${npm_package_config_producer}/* && cp dist/webpack/* ${npm_package_config_producer}",
     "commonjs": "BABEL_ENV=commonjs yarn babel dist/commonjs",
     "es6": "BABEL_ENV=es6 yarn babel dist/es6",
     "lint": "eslint ./src",
     "prettier:check": "prettier $npm_package_config_src --check",
     "prettier": "prettier $npm_package_config_src --write",
+    "start": "(cd producer/ && ws --hostname localhost -p 3000)",
     "systemjs": "BABEL_ENV=systemjs yarn babel dist/systemjs",
     "test": "yarn lint && yarn prettier:check",
     "umd": "BABEL_ENV=umd yarn babel dist/umd",
@@ -59,6 +62,7 @@
     "eslint-plugin-react": "^7.15.1",
     "eslint-plugin-react-hooks": "^1.7.0",
     "husky": "^3.0.8",
+    "local-web-server": "^3.0.7",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
     "terser-webpack-plugin": "^2.1.2",
