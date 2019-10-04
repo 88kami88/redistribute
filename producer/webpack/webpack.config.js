@@ -1,19 +1,10 @@
 const path = require('path');
-const merge = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const URLImportPlugin = require('webpack-external-import/webpack');
 const webpack = require('webpack');
 
-// Load the mode from the command line arg
-// const mode = process.argv[process.argv.findIndex(a => a === '--mode') + 1];
+const pkg = require('../../package.json');
 
-// // Load specific configs for dev vs prod builds
-// const ENV = (mode === 'production' && 'prod') || (process.env.NODE_ENV === 'production' && 'prod') || 'dev';
-
-// // eslint-disable-next-line import/no-dynamic-require
-// const env = require(`./webpack.config.${ENV}.js`);
-
-// const base = {
 module.exports = {
   entry: path.resolve(__dirname, '../', 'src/index'),
 
@@ -25,7 +16,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['*.{js,map}'] }),
     new URLImportPlugin({
-      manifestName: 'producer',
+      manifestName: pkg.name,
     }),
     new webpack.LoaderOptionsPlugin({
       debug: true,

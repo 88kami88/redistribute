@@ -8,15 +8,18 @@ import { ExternalComponent, corsImport, importDependenciesOf, getChunkPath } fro
 
 interface Props {}
 
+const PROVIDER_BASE_URL = 'http://localhost:3001/';
+const PROVIDER_NAME = '@ethersage/redistribute';
+
 const App: FunctionComponent<Props> = () => {
   const [isLoaded, setState] = useState(false);
   useEffect(() => {
-    corsImport('http://localhost:3001/importManifest.js').then(() =>
+    corsImport(`${PROVIDER_BASE_URL}importManifest.js`).then(() =>
       Promise.all([
-        importDependenciesOf('http://localhost:3001/', 'producer', 'Button.js').then((url: string) =>
+        importDependenciesOf(PROVIDER_BASE_URL, PROVIDER_NAME, 'Button.js').then((url: string) =>
           import(/* webpackIgnore:true */ url)
         ),
-        importDependenciesOf('http://localhost:3001/', 'producer', 'getText.js').then((url: string) =>
+        importDependenciesOf(PROVIDER_BASE_URL, PROVIDER_NAME, 'getText.js').then((url: string) =>
           import(/* webpackIgnore:true */ url)
         ),
       ]).then(() => setState(true))
