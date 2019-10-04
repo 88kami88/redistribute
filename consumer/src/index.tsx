@@ -1,45 +1,38 @@
 import 'webpack-external-import/polyfill';
 
-import React, { Component } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+// @ts-ignore
 import { ExternalComponent, corsImport, importDependenciesOf, getChunkPath } from 'webpack-external-import';
 
 interface Props {}
 
-class App extends Component {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isLoaded: false,
-    };
-  }
-
-  componentDidMount() {
+const App: FunctionComponent<Props> = () => {
+  const [isLoaded, setState] = useState(false);
+  useEffect(() => {
     corsImport('http://localhost:3001/importManifest.js').then(() =>
       Promise.all([
-        importDependenciesOf('http://localhost:3001/', 'producer', 'Button.js').then(url =>
+        importDependenciesOf('http://localhost:3001/', 'producer', 'Button.js').then((url: string) =>
           import(/* webpackIgnore:true */ url)
         ),
-        importDependenciesOf('http://localhost:3001/', 'producer', 'getText.js').then(url =>
+        importDependenciesOf('http://localhost:3001/', 'producer', 'getText.js').then((url: string) =>
           import(/* webpackIgnore:true */ url)
         ),
-      ]).then(() => this.setState({ isLoaded: true }))
+      ]).then(() => setState(true))
     );
+  });
+
+  if (!isLoaded) {
+    return <div>'loading...'</div>;
   }
+  // @ts-ignore
+  const getText = __webpack_require__('getText').default;
 
-  render() {
-    const { isLoaded } = this.state;
+  // @ts-ignore
+  const Button = __webpack_require__('Button').default;
 
-    if (!isLoaded) {
-      return 'loading...';
-    }
-
-    const getText = __webpack_require__('getText').default;
-    const Button = __webpack_require__('Button').default;
-
-    return <Button onClick={() => alert('clicked')}>{getText()}</Button>;
-  }
-}
+  return <Button onClick={() => alert('clicked')}>{getText()}</Button>;
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));
