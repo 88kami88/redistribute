@@ -1,26 +1,41 @@
 {
-  "name": "redistribute",
+  "name": "@ethersage/redistribute",
   "version": "0.0.0",
   "description": "Template repo for authoring libraries that export React components",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "sideEffects": false,
   "config": {
-    "src": "./{src/**/*.{js,jsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}"
+    "consumer": "consumer",
+    "dist": {
+      "amd": "dist/amd",
+      "commonjs": "dist/commonjs",
+      "es6": "dist/es6",
+      "systemjs": "dist/systemjs",
+      "umd": "dist/umd",
+      "webpack": "dist/webpack"
+    },
+    "extensions": ".js,.jsx,.ts,.tsx",
+    "producer": "producer",
+    "src": "{src/**/*.{js,jsx,ts,tsx,json},package.json,.prettierrc,.huskyrc.json|.eslintrc|.circleci/**/*.xml}",
+    "webpack": "webpack/webpack.config.js"
   },
   "scripts": {
-    "amd": "BABEL_ENV=amd yarn babel dist/amd",
-    "babel": "babel src/ -s --extensions \".js,.jsx,.ts,.tsx\" --out-dir",
+    "amd": "BABEL_ENV=amd yarn babel $npm_package_config_producer/$npm_package_config_dist_amd",
+    "babel": "babel $npm_package_config_producer/$npm_package_config_src -s --extensions \"$npm_package_config_extensions\" --out-dir",
     "build": "yarn amd && yarn commonjs && yarn es6 && yarn systemjs && yarn umd && yarn webpack",
-    "commonjs": "BABEL_ENV=commonjs yarn babel dist/commonjs",
-    "es6": "BABEL_ENV=es6 yarn babel dist/es6",
-    "lint": "eslint ./src",
-    "prettier:check": "prettier $npm_package_config_src --check",
-    "prettier": "prettier $npm_package_config_src --write",
-    "systemjs": "BABEL_ENV=systemjs yarn babel dist/systemjs",
+    "build:consumer": "webpack --config $npm_package_config_consumer/$npm_package_config_webpack --mode development",
+    "commonjs": "BABEL_ENV=commonjs yarn babel $npm_package_config_producer/$npm_package_config_dist_commonjs",
+    "es6": "BABEL_ENV=es6 yarn babel $npm_package_config_producer/$npm_package_config_dist_es6",
+    "lint": "eslint $npm_package_config_producer/$npm_package_config_src",
+    "prettier:check": "prettier $npm_package_config_producer/$npm_package_config_src --check",
+    "prettier": "prettier $npm_package_config_producer/$npm_package_config_src --write",
+    "start:consumer": "(cd $npm_package_config_consumer/public && ws --hostname localhost -p 3002)",
+    "start:producer": "(cd $npm_package_config_producer/$npm_package_config_dist_webpack && ws --hostname localhost -p 3001)",
+    "systemjs": "BABEL_ENV=systemjs yarn babel $npm_package_config_producer/$npm_package_config_dist_systemjs",
     "test": "yarn lint && yarn prettier:check",
-    "umd": "BABEL_ENV=umd yarn babel dist/umd",
-    "webpack": "webpack --config webpack/webpack.config.js --mode production"
+    "umd": "BABEL_ENV=umd yarn babel $npm_package_config_producer/$npm_package_config_dist_umd",
+    "webpack": "webpack --config $npm_package_config_producer/$npm_package_config_webpack --mode development"
   },
   "repository": {
     "type": "git",
@@ -48,6 +63,8 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
+    "@typescript-eslint/eslint-plugin": "^2.3.2",
+    "@typescript-eslint/parser": "^2.3.2",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^6.5.1",
@@ -58,18 +75,23 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.15.1",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
     "husky": "^3.0.8",
+    "local-web-server": "^3.0.7",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
     "terser-webpack-plugin": "^2.1.2",
+    "typescript": "^3.6.3",
     "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9",
-    "webpack-merge": "^4.2.2"
+    "webpack-cli": "^3.3.9"
   },
   "dependencies": {
     "@types/react": "^16.9.4",
     "@types/react-dom": "^16.9.1",
-    "react": "^16.10.1"
+    "prop-types": "^15.7.2",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.2",
+    "webpack-external-import": "^0.1.0-beta.1"
   },
   "volta": {
     "node": "10.16.3",
