@@ -1,0 +1,14 @@
+.circleci
+consumer/
+node_modules/
+.babelrc
+.eslintrc
+.gitignore
+.huskyrc.json
+.npmrc
+.prettierrc
+no-changes.sh
+tsconfig.json
+yarn.lock
+producer/src/
+producer/webpack/
