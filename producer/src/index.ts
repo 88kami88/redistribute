@@ -1,2 +1,2 @@
-export { default as Button } from './Button';
-export { default as getText } from './get-text';
+export { default as Touchable } from './Touchable';
+export { default as View } from './View';
